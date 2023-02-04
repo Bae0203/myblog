@@ -1,0 +1,17 @@
+export default function WritePage() {
+  return (
+    <>
+      <nav>
+        <label>제목</label>
+        <input type="text" placeholder="제목을 입력해주세요." />
+      </nav>
+      <nav>
+        <label>내용</label>
+        <textarea placeholder="내용을 입력해주세요."></textarea>
+      </nav>
+      <nav>
+        <input type="file" accept="image/*" />
+      </nav>
+    </>
+  );
+}
