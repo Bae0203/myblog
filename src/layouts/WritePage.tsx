@@ -1,5 +1,6 @@
 import { useRef, useState, useMemo } from "react";
 import BlankImg from "../asset/person.png";
+import * as S from "../style/WritePageStyle";
 
 type UploadImage = {
   file: File;
@@ -31,14 +32,14 @@ export default function WritePage() {
 
   const showImage = useMemo(() => {
     if (!img && img == null) {
-      return <img src={BlankImg} alt="사진이 비어있습니다." />;
+      return <S.ShowImg src={BlankImg} alt="사진이 비어있습니다." />;
     }
     return (
-      <img
+      <S.ShowImg
         src={img.thumbnail}
         alt={img.type}
         onClick={handleClickFileInput}
-      ></img>
+      ></S.ShowImg>
     );
   }, [img]);
 
@@ -53,6 +54,7 @@ export default function WritePage() {
         <textarea placeholder="내용을 입력해주세요."></textarea>
       </nav>
       {showImage}
+      <S.ShowImgP>- 미리보기 이미지 -</S.ShowImgP>
       <form>
         <input
           type="file"
