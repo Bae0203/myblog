@@ -9,7 +9,13 @@ export default function WritePage() {
         <label>내용</label>
         <textarea placeholder="내용을 입력해주세요."></textarea>
       </nav>
-      <button onClick={() => {}}>만들기</button>
+      <button
+        onClick={() => {
+          alert("만드시겠습니까?");
+        }}
+      >
+        만들기
+      </button>
     </>
   );
 }
