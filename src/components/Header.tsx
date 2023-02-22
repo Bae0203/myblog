@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import * as S from "../style/HeaderStyle";
 
 export default function Header() {
   const Navigate = useNavigate();
   return (
-    <header>
-      <p onClick={() => Navigate("/")}>MyBlog</p>
-      <p onClick={() => Navigate("/write")}>Write</p>
-    </header>
+    <S.Header>
+      <S.MainTitle onClick={() => Navigate("/")}>MyBlog</S.MainTitle>
+      <S.Content onClick={() => Navigate("/write")}>Write</S.Content>
+    </S.Header>
   );
 }
