@@ -1,52 +1,30 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import PostBox from "../components/PostBox";
 
-interface IUseLocalstorageKey {
-  key: string;
+interface IContent {
+  title: string;
+  context: string;
 }
-
-interface IUseLocalstorageSet {
-  key: string;
-  value: string;
-}
-
-const useLSGet = (props: IUseLocalstorageKey) => {
-  return localStorage.getItem(props.key);
-};
-const useLSSet = (props: IUseLocalstorageSet) => {
-  return localStorage.setItem(props.key, props.value);
-};
-const useLSRemove = (props: IUseLocalstorageKey) => {
-  return localStorage.removeItem(props.key);
-};
-
-const useLocalStorage = (method: string) => {
-  if (method === "get") {
-    return useLSGet;
-  } else if (method === "set") {
-    return useLSSet;
-  } else if (method === "remove") {
-    return useLSRemove;
-  }
-};
 
 function Main() {
-  const useLocalStorageSet = useLocalStorage("set");
-  const [value, setValue] = useState<string>("");
-  const [pageCount, setPageCount] = useState<number>(0);
+  const [content, setContent] = useState<IContent[] | null>();
+  useEffect(() => {
+    const TitleList: string | null = localStorage.getItem("title");
+    const ContextList: string | null = localStorage.getItem("context");
+    if (TitleList != null && ContextList != null) {
+      let ParseTitleList: string[] = JSON.parse(TitleList);
+      let ParseContextList: string[] = JSON.parse(ContextList);
+      ParseTitleList.map((value, index) => {
+        let CombineContent: IContent = {
+          title: value,
+          context: ParseContextList[index],
+        };
+      });
+    }
+  }, []);
   return (
     <>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          useLocalStorageSet({ key: String(pageCount), value: value });
-        }}
-      >
-        추가
-      </button>
+      <PostBox></PostBox>
     </>
   );
 }
