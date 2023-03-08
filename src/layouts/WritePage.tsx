@@ -1,45 +1,53 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import UploadImage from "../components/UploadImage";
 
-export default function WritePage() {
-  const navigate = useNavigate();
-  const [title, setTitle] = useState<string>("");
-  const [context, setContext] = useState<string>("");
+const WritePage = () => {
+  const [newImageUrl, setNewImageUrl] = useState<string | null>(null);
+  const [newTitle, setNewTitle] = useState<string>("");
+  const [newContext, setNewContext] = useState<string>("");
+
+  const SaveButtonHandler = () => {
+    let CheckSaveContent = window.confirm("게시물을 올리겠습니까?");
+    if (CheckSaveContent) {
+      if (newImageUrl == null || newTitle == null || newContext == null) {
+        alert("정보를 제대로 입력해주세요");
+        return;
+      }
+    }
+  };
+
   return (
     <>
+      <p>글 생성</p>
       <nav>
-        <span>제목</span>
+        <p>제목</p>
         <input
           type="text"
-          placeholder="제목을 입력해주세요."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          placeholder="제목"
+          value={newTitle}
+          onChange={(event) => setNewTitle(event.target.value)}
         />
       </nav>
       <nav>
-        <span>내용</span>
+        <p>내용</p>
         <textarea
-          placeholder="내용을 입력해주세요."
-          value={context}
-          onChange={(e) => setContext(e.target.value)}
-        ></textarea>
+          placeholder="내용"
+          value={newContext}
+          onChange={(event) => setNewContext(event.target.value)}
+        />
       </nav>
-      <button
-        onClick={() => {
-          if (title === "" || context === "") {
-            alert("정보를 제대로 입력해주세요.");
-          } else {
-            let MakingCheck: boolean = window.confirm(
-              title + "\n" + context + "로 만드시겠습니까?"
-            );
-            if (MakingCheck) {
-              navigate("/");
-            }
-          }
-        }}
-      >
-        만들기
-      </button>
+      <nav>
+        <p>사진 업로드</p>
+        <p>3:4 사이즈를 권장합니다.</p>
+        <UploadImage
+          imageUrl={newImageUrl}
+          setImageUrl={setNewImageUrl}
+        ></UploadImage>
+      </nav>
+
+      <button onClick={SaveButtonHandler}>글 올리기</button>
     </>
   );
-}
+};
+
+export default WritePage;
