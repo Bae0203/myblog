@@ -9,6 +9,7 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/write" element={<WritePage />}></Route>
+        <Route path="/detail/:id" element={<WritePage />}></Route>
       </Routes>
     </BrowserRouter>
   );
