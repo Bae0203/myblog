@@ -1,6 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
-import DetailPage from "./layouts/DetailPage";
 import Main from "./layouts/Main";
 import WritePage from "./layouts/WritePage";
 export default function Router() {
@@ -9,7 +8,6 @@ export default function Router() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route path="/detail" element={<DetailPage />}></Route>
         <Route path="/write" element={<WritePage />}></Route>
       </Routes>
     </BrowserRouter>
