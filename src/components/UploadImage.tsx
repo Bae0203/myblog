@@ -11,7 +11,6 @@ const UploadImage = (props: IUploadImageProps) => {
     const reader = new FileReader();
     if (file) {
       const fileResource = file[0];
-
       reader.onload = () => {
         const Image = URL.createObjectURL(fileResource);
         props.setImageUrl(Image);
