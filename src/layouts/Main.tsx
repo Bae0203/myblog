@@ -12,15 +12,15 @@ function Main() {
     let parseImageUrl: string | null = localStorage.getItem("image");
     if (parseTitle) {
       const TitleList: string[] = JSON.parse(parseTitle);
-      setTitleList([...TitleList]);
+      setTitleList([...TitleList.reverse()]);
     }
     if (parseContext) {
       const ContextList: string[] = JSON.parse(parseContext);
-      setContextList([...ContextList]);
+      setContextList([...ContextList.reverse()]);
     }
     if (parseImageUrl) {
       const ImageUrlList: string[] = JSON.parse(parseImageUrl);
-      setImageUrlList([...ImageUrlList]);
+      setImageUrlList([...ImageUrlList.reverse()]);
     }
   }, []);
 
@@ -29,7 +29,13 @@ function Main() {
       <p>내 글 목록들</p>
       <button onClick={() => localStorage.clear()}>dd</button>
       {titleList.map((e, i) => {
-        return <PostContent title={e} context={contextList[i]}></PostContent>;
+        return (
+          <PostContent
+            title={e}
+            context={contextList[i]}
+            index={i}
+          ></PostContent>
+        );
       })}
     </>
   );
