@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import PostContent from "../components/PostContent";
 import { useRecoilValue } from "recoil";
 import { EntriePostContent, IPostContent } from "../store/PostInformation";

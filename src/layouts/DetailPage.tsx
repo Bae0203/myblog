@@ -11,14 +11,12 @@ const DetailPage = () => {
       {PostValue && id ? (
         <>
           <div>dd</div>
-          <button
-            onClick={() => console.log(PostValue.title[Number(id)], Number(id))}
-          >
+          <button onClick={() => console.log(PostValue.imageUrl[Number(id)])}>
             ddd
           </button>
           <p>제목 : {PostValue.title[Number(id)]}</p>
-          <p>내용 : </p>
-          <img src="" alt="image" />
+          <p>내용 : {PostValue.context[Number(id)]}</p>
+          <img src={PostValue.imageUrl[Number(id)]} alt="image" />
         </>
       ) : (
         <p>404! 내용이 없습니다!</p>
