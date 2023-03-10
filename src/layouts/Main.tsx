@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
 import PostContent from "../components/PostContent";
+import { useRecoilState } from "recoil";
+import { EntriePostContent, IPostContent } from "../store/PostInformation";
 
 function Main() {
-  const [titleList, setTitleList] = useState<string[]>([]);
-  const [contextList, setContextList] = useState<string[]>([]);
-  const [imageUrlList, setImageUrlList] = useState<string[]>([]);
+  const [entireContent, setEntireContent] = useRecoilState<IPostContent | null>(
+    EntriePostContent
+  );
 
   useEffect(() => {
     let parseTitle: string | null = localStorage.getItem("title");
     let parseContext: string | null = localStorage.getItem("context");
     let parseImageUrl: string | null = localStorage.getItem("image");
-    if (parseTitle) {
+    if (parseTitle && parseContext && parseImageUrl) {
       const TitleList: string[] = JSON.parse(parseTitle);
-      setTitleList([...TitleList.reverse()]);
-    }
-    if (parseContext) {
+      TitleList.reverse();
       const ContextList: string[] = JSON.parse(parseContext);
-      setContextList([...ContextList.reverse()]);
-    }
-    if (parseImageUrl) {
+      ContextList.reverse();
       const ImageUrlList: string[] = JSON.parse(parseImageUrl);
-      setImageUrlList([...ImageUrlList.reverse()]);
+      ImageUrlList.reverse();
+
+      let CopyContent: IPostContent = {
+        title: TitleList,
+        context: ContextList,
+        imageUrl: ImageUrlList,
+      };
+
+      setEntireContent({ ...CopyContent });
     }
   }, []);
 
@@ -28,11 +34,11 @@ function Main() {
     <>
       <p>내 글 목록들</p>
       <button onClick={() => localStorage.clear()}>dd</button>
-      {titleList.map((e, i) => {
+      {entireContent?.title?.map((e, i) => {
         return (
           <PostContent
             title={e}
-            context={contextList[i]}
+            context={entireContent.context[i]}
             index={i}
           ></PostContent>
         );

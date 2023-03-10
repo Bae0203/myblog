@@ -1,12 +1,12 @@
 import { atom } from "recoil";
 
-interface IPostContent {
+export interface IPostContent {
   title: string[];
   context: string[];
   imageUrl: string[];
 }
 
-export const PostContent = atom<IPostContent | null>({
+export const EntriePostContent = atom<IPostContent | null>({
   key: "PostContent",
-  default: null,
+  default: { title: [], context: [], imageUrl: [] },
 });
