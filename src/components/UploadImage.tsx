@@ -1,4 +1,5 @@
 import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import * as S from "../style/CusInputFileStyle";
 
 interface IUploadImageProps {
   imageUrl: string | null;
@@ -24,7 +25,7 @@ const UploadImage = (props: IUploadImageProps) => {
       {props.imageUrl ? (
         <>
           <p>미리보기 이미지</p>
-          <img src={props.imageUrl} alt="유감" />
+          <S.PreviewImage src={props.imageUrl} alt="유감" />
         </>
       ) : null}
       <input type="file" onChange={ImageOnChangeHandler} accept="image/*" />
