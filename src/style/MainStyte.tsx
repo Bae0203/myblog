@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeadTitle = styled.p`
-  margin: 0.5rem 1rem;
+  margin: 3rem 0rem 0.5rem 14rem;
   font-size: 1.2rem;
 `;
 
